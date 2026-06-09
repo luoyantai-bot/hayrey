@@ -1,6 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -169,4 +169,18 @@ html {
   mask-composite: exclude;
   -webkit-mask-composite: xor;
   pointer-events: none;
+}
+
+/* Section divider */
+.section-divider {
+  border-top: 1px solid #1E293B;
+}
+
+/* Hover card effect */
+.hover-card {
+  transition: all 0.3s ease;
+}
+.hover-card:hover {
+  border-color: rgba(184, 115, 51, 0.3);
+  box-shadow: 0 0 30px rgba(184, 115, 51, 0.08);
 }
