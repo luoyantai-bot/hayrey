@@ -10,6 +10,8 @@ import {
   Send,
   FileDown,
   CheckCircle2,
+  AlertCircle,
+  Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,19 +22,19 @@ const CONTACT_INFO = [
   {
     icon: Mail,
     label: "Email",
-    value: "sales@hairi-pcb.com",
+    value: "luoyantai@hayrey.net",
     desc: "Response within 24 hours",
   },
   {
     icon: Phone,
     label: "WhatsApp",
-    value: "+86 138 2925 8XXX",
+    value: "+86 13817426321",
     desc: "Direct line to sales engineer",
   },
   {
     icon: MapPin,
     label: "Factory Address",
-    value: "Dongguan, Guangdong, China",
+    value: "Room 401 & 402, Building 4, No.13 Huanbao South Rd, Shatian, Dongguan, Guangdong, China",
     desc: "Visits welcome by appointment",
   },
 ];
@@ -71,20 +73,48 @@ export default function ContactSection() {
     quantity: "",
     message: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [submitState, setSubmitState] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [deckEmail, setDeckEmail] = useState("");
-  const [deckSubmitted, setDeckSubmitted] = useState(false);
+  const [deckState, setDeckState] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    setSubmitState("loading");
+    try {
+      const res = await fetch("/api", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "quote", ...formData }),
+      });
+      if (res.ok) {
+        setSubmitState("success");
+        setFormData({ name: "", email: "", company: "", productType: "", quantity: "", message: "" });
+      } else {
+        setSubmitState("error");
+      }
+    } catch {
+      setSubmitState("error");
+    }
   };
 
-  const handleDeckSubmit = (e: React.FormEvent) => {
+  const handleDeckSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setDeckSubmitted(true);
-    setTimeout(() => setDeckSubmitted(false), 4000);
+    setDeckState("loading");
+    try {
+      const res = await fetch("/api", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "deck", email: deckEmail }),
+      });
+      if (res.ok) {
+        setDeckState("success");
+        setDeckEmail("");
+      } else {
+        setDeckState("error");
+      }
+    } catch {
+      setDeckState("error");
+    }
   };
 
   return (
@@ -95,7 +125,7 @@ export default function ContactSection() {
           <div className="text-copper text-xs tracking-[0.2em] uppercase mb-3 font-medium">
             Contact
           </div>
-          <h2 className="font-['Syne'] text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-4">
+          <h2 className="font-['Inter'] text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-4">
             Get In <span className="text-gradient-copper">Touch</span>
           </h2>
           <p className="text-text-muted max-w-2xl text-sm md:text-base leading-relaxed">
@@ -113,7 +143,7 @@ export default function ContactSection() {
                   <MessageSquare size={20} className="text-copper" />
                 </div>
                 <div>
-                  <h3 className="font-['Syne'] text-lg font-bold text-text-primary">
+                  <h3 className="font-['Inter'] text-lg font-bold text-text-primary">
                     Request a Quote
                   </h3>
                   <div className="text-text-dim text-xs">
@@ -122,20 +152,26 @@ export default function ContactSection() {
                 </div>
               </div>
 
-              {submitted ? (
+              {submitState === "success" ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   className="flex flex-col items-center justify-center py-16 text-center"
                 >
                   <CheckCircle2 size={48} className="text-green mb-4" />
-                  <h4 className="font-['Syne'] text-xl font-bold text-text-primary mb-2">
+                  <h4 className="font-['Inter'] text-xl font-bold text-text-primary mb-2">
                     Inquiry Submitted
                   </h4>
                   <p className="text-text-muted text-sm max-w-sm">
                     Thank you for your inquiry. Our engineering team will review your requirements 
                     and respond within 24 hours with a detailed quotation.
                   </p>
+                  <button
+                    onClick={() => setSubmitState("idle")}
+                    className="mt-6 text-copper text-xs font-bold tracking-wider uppercase hover:text-copper-light transition-colors"
+                  >
+                    Submit Another Inquiry
+                  </button>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
@@ -152,6 +188,7 @@ export default function ContactSection() {
                         }
                         className="bg-navy border-border-dark text-text-primary placeholder:text-text-dim focus:border-copper focus:ring-copper/20"
                         placeholder="John Smith"
+                        disabled={submitState === "loading"}
                       />
                     </div>
                     <div className="space-y-2">
@@ -167,6 +204,7 @@ export default function ContactSection() {
                         }
                         className="bg-navy border-border-dark text-text-primary placeholder:text-text-dim focus:border-copper focus:ring-copper/20"
                         placeholder="john@company.com"
+                        disabled={submitState === "loading"}
                       />
                     </div>
                   </div>
@@ -182,6 +220,7 @@ export default function ContactSection() {
                       }
                       className="bg-navy border-border-dark text-text-primary placeholder:text-text-dim focus:border-copper focus:ring-copper/20"
                       placeholder="Company name"
+                      disabled={submitState === "loading"}
                     />
                   </div>
 
@@ -199,7 +238,8 @@ export default function ContactSection() {
                             productType: e.target.value,
                           })
                         }
-                        className="w-full bg-navy border border-border-dark text-text-primary text-sm rounded-md px-3 py-2 focus:border-copper focus:ring-copper/20 focus:outline-none"
+                        className="w-full bg-navy border border-border-dark text-text-primary text-sm rounded-md px-3 py-2 focus:border-copper focus:ring-copper/20 focus:outline-none disabled:opacity-50"
+                        disabled={submitState === "loading"}
                       >
                         <option value="">Select product type</option>
                         {PRODUCT_TYPES.map((type) => (
@@ -220,6 +260,7 @@ export default function ContactSection() {
                         }
                         className="bg-navy border-border-dark text-text-primary placeholder:text-text-dim focus:border-copper focus:ring-copper/20"
                         placeholder="e.g., 100pcs sample / 10K batch"
+                        disabled={submitState === "loading"}
                       />
                     </div>
                   </div>
@@ -235,19 +276,37 @@ export default function ContactSection() {
                       }
                       className="bg-navy border-border-dark text-text-primary placeholder:text-text-dim focus:border-copper focus:ring-copper/20 min-h-[120px]"
                       placeholder="Describe your thermal requirements, board specifications, or any questions..."
+                      disabled={submitState === "loading"}
                     />
                   </div>
+
+                  {submitState === "error" && (
+                    <div className="flex items-center gap-2 text-red-400 text-xs">
+                      <AlertCircle size={14} />
+                      Submission failed. Please try again or email us directly.
+                    </div>
+                  )}
 
                   <div className="flex items-center gap-4">
                     <Button
                       type="submit"
-                      className="bg-copper hover:bg-copper-light text-navy font-bold tracking-wider uppercase text-sm px-8 py-3 rounded-lg"
+                      disabled={submitState === "loading"}
+                      className="bg-copper hover:bg-copper-light text-navy font-bold tracking-wider uppercase text-sm px-8 py-3 rounded-lg disabled:opacity-60"
                     >
-                      <Send size={16} className="mr-2" />
-                      Submit Inquiry
+                      {submitState === "loading" ? (
+                        <>
+                          <Loader2 size={16} className="mr-2 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send size={16} className="mr-2" />
+                          Submit Inquiry
+                        </>
+                      )}
                     </Button>
                     <span className="text-text-dim text-xs">
-                      Or email us directly at sales@hairi-pcb.com
+                      Or email us directly at luoyantai@hayrey.net
                     </span>
                   </div>
                 </form>
@@ -264,7 +323,7 @@ export default function ContactSection() {
                   <FileDown size={20} className="text-copper" />
                 </div>
                 <div>
-                  <h4 className="font-['Syne'] text-base font-bold text-text-primary">
+                  <h4 className="font-['Inter'] text-base font-bold text-text-primary">
                     Capability Deck
                   </h4>
                   <div className="text-text-dim text-xs">
@@ -273,7 +332,7 @@ export default function ContactSection() {
                 </div>
               </div>
 
-              {deckSubmitted ? (
+              {deckState === "success" ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -281,7 +340,7 @@ export default function ContactSection() {
                 >
                   <CheckCircle2 size={32} className="text-green mx-auto mb-3" />
                   <p className="text-text-secondary text-sm">
-                    Download link sent to your email!
+                    Request received! We&apos;ll send the deck to your email shortly.
                   </p>
                 </motion.div>
               ) : (
@@ -293,15 +352,32 @@ export default function ContactSection() {
                     onChange={(e) => setDeckEmail(e.target.value)}
                     className="bg-navy border-border-dark text-text-primary placeholder:text-text-dim focus:border-copper focus:ring-copper/20 text-sm"
                     placeholder="Enter your email"
+                    disabled={deckState === "loading"}
                   />
                   <Button
                     type="submit"
-                    className="w-full bg-copper/15 border border-copper/30 text-copper hover:bg-copper/25 font-bold tracking-wider uppercase text-xs py-2.5 rounded-md"
+                    disabled={deckState === "loading"}
+                    className="w-full bg-copper/15 border border-copper/30 text-copper hover:bg-copper/25 font-bold tracking-wider uppercase text-xs py-2.5 rounded-md disabled:opacity-60"
                     variant="outline"
                   >
-                    <FileDown size={14} className="mr-2" />
-                    Download PDF
+                    {deckState === "loading" ? (
+                      <>
+                        <Loader2 size={14} className="mr-2 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <FileDown size={14} className="mr-2" />
+                        Download PDF
+                      </>
+                    )}
                   </Button>
+                  {deckState === "error" && (
+                    <div className="flex items-center gap-2 text-red-400 text-xs justify-center">
+                      <AlertCircle size={12} />
+                      Failed. Please try again.
+                    </div>
+                  )}
                   <p className="text-text-dim text-[10px] text-center leading-relaxed">
                     By downloading, you agree to receive occasional product updates. 
                     Unsubscribe anytime.
@@ -346,7 +422,7 @@ export default function ContactSection() {
 
             {/* Quick Response Promise */}
             <div className="bg-copper/5 border border-copper/20 rounded-xl p-5 text-center">
-              <div className="text-copper font-bold font-['Syne'] text-2xl mb-1">24h</div>
+              <div className="text-copper font-bold font-['Inter'] text-2xl mb-1">24h</div>
               <div className="text-text-secondary text-xs">
                 Maximum response time for all inquiries
               </div>

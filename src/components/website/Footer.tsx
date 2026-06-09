@@ -11,13 +11,13 @@ const FOOTER_LINKS = {
     "Sampling Process",
   ],
   Applications: [
-    "Entertainment Lighting",
-    "Automotive Electronics",
-    "Industrial Power",
     "Commercial Lighting",
+    "Automotive Electronics",
+    "Industrial Control",
+    "Semiconductor Packaging",
   ],
   Company: [
-    "About Hairi",
+    "About Hayrey",
     "Manufacturing",
     "Certifications",
     "Quality Control",
@@ -46,14 +46,16 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-md bg-copper flex items-center justify-center">
-                <span className="text-navy font-bold text-sm font-['Syne']">H</span>
-              </div>
+              <img
+                src="/images/hayrey-logo.jpg"
+                alt="Hayrey Logo"
+                className="w-8 h-8 rounded-md object-cover"
+              />
               <div className="flex items-baseline gap-1">
-                <span className="text-copper font-bold text-lg tracking-wider font-['Syne']">
-                  HAIRI
+                <span className="text-copper font-bold text-lg tracking-wider font-['Inter']">
+                  HAYREY
                 </span>
-                <span className="text-text-dim text-xs tracking-widest">INTEGRATION</span>
+                <span className="text-text-dim text-xs tracking-widest">INTEGRATED</span>
               </div>
             </div>
             <p className="text-text-muted text-xs leading-relaxed mb-6 max-w-xs">
@@ -63,15 +65,15 @@ export default function Footer() {
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-text-dim text-xs">
                 <Mail size={12} className="text-copper" />
-                sales@hairi-pcb.com
+                luoyantai@hayrey.net
               </div>
               <div className="flex items-center gap-2 text-text-dim text-xs">
                 <Phone size={12} className="text-copper" />
-                +86 138 2925 8XXX
+                +86 13817426321
               </div>
               <div className="flex items-center gap-2 text-text-dim text-xs">
                 <MapPin size={12} className="text-copper" />
-                Dongguan, Guangdong, China
+                Rm 401&402, Bldg 4, No.13 Huanbao South Rd, Shatian, Dongguan, GD, China
               </div>
             </div>
           </div>
@@ -93,11 +95,11 @@ export default function Footer() {
                           "Special Structures": "products",
                           "Parameter Comparison": "products",
                           "Sampling Process": "products",
-                          "Entertainment Lighting": "applications",
-                          "Automotive Electronics": "applications",
-                          "Industrial Power": "applications",
                           "Commercial Lighting": "applications",
-                          "About Hairi": "about",
+                          "Automotive Electronics": "applications",
+                          "Industrial Control": "applications",
+                          "Semiconductor Packaging": "applications",
+                          "About Hayrey": "about",
                           Manufacturing: "manufacturing",
                           Certifications: "certifications",
                           "Quality Control": "manufacturing",
@@ -122,7 +124,7 @@ export default function Footer() {
       <div className="border-t border-border-dark">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="text-text-dim text-xs">
-            &copy; {new Date().getFullYear()} Hairi Integration Co., Ltd. All rights reserved.
+            &copy; {new Date().getFullYear()} Dongguan Hayrey Integrated Technology Co,.LTD. All rights reserved.
           </div>
           <div className="flex items-center gap-4 text-text-dim text-xs">
             <button className="hover:text-copper transition-colors">Privacy Policy</button>

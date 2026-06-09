@@ -67,15 +67,17 @@ export default function Navbar() {
             onClick={() => scrollTo("home")}
             className="flex items-center gap-2 group"
           >
-            <div className="w-8 h-8 rounded-md bg-copper flex items-center justify-center">
-              <span className="text-navy font-bold text-sm font-['Syne']">H</span>
-            </div>
+            <img
+              src="/images/hayrey-logo.jpg"
+              alt="Hayrey Integrated Technology Logo"
+              className="w-8 h-8 md:w-10 md:h-10 rounded-md object-cover"
+            />
             <div className="flex items-baseline gap-1">
-              <span className="text-copper font-bold text-lg tracking-wider font-['Syne']">
-                HAIRI
+              <span className="text-copper font-bold text-lg tracking-wider font-['Inter']">
+                HAYREY
               </span>
               <span className="text-text-dim text-xs tracking-widest hidden sm:inline">
-                INTEGRATION
+                INTEGRATED
               </span>
             </div>
           </button>

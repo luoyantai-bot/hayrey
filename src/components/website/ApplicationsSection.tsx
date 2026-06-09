@@ -1,64 +1,32 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Lightbulb, Car, Factory, Building2 } from "lucide-react";
+import Image from "next/image";
 
-const APPLICATIONS = [
+const INDUSTRIES = [
   {
-    icon: Lightbulb,
-    title: "Entertainment & Stage Lighting",
-    subtitle: "For WET-class clients",
-    color: "#F59E0B",
-    description:
-      "From immersive water feature installations to high-power stage lighting systems, our copper-base MCPCBs deliver the thermal performance that entertainment applications demand. We specialize in round and custom-form-factor boards for LED arrays that must operate continuously under extreme conditions without thermal degradation.",
-    features: [
-      "Water feature & fountain lighting controllers",
-      "High-power stage & concert lighting",
-      "Custom round and irregular form factors",
-      "Continuous-operation thermal reliability",
-    ],
+    title: "Commercial Lighting",
+    hoverLine: "Architectural, track & explosion-proof LED fixtures",
+    image: "/images/applications/commercial-lighting.jpg",
+    photoLabel: "Commercial LED lighting fixtures",
   },
   {
-    icon: Car,
     title: "Automotive Electronics",
-    subtitle: "IATF 16949 Certified",
-    color: "#4ADE80",
-    description:
-      "Automotive applications require zero-compromise quality and full traceability. Our IATF 16949 certification backs every board we ship for vehicle lighting, on-board chargers, and new energy power modules. We understand the rigorous qualification process and provide complete documentation and PPAP support.",
-    features: [
-      "LED headlight & taillight drivers",
-      "On-board charger (OBC) modules",
-      "NEV power conversion boards",
-      "Full PPAP & traceability support",
-    ],
+    hoverLine: "IATF 16949 certified — OBC & EV power modules",
+    image: "/images/applications/automotive-electronics.jpg",
+    photoLabel: "Automotive LED headlight / OBC board",
   },
   {
-    icon: Factory,
-    title: "Industrial Power",
-    subtitle: "Server & Drive Systems",
-    color: "#60A5FA",
-    description:
-      "Industrial power electronics push thermal limits every day. Our MCPCBs serve in IDC server power supplies, variable frequency drives, and industrial lighting systems where failure is not an option. The superior thermal conductivity of our copper-base boards ensures long-term reliability under sustained high-load operation.",
-    features: [
-      "IDC server power supply boards",
-      "Variable frequency drive modules",
-      "Industrial LED lighting drivers",
-      "High-reliability sustained operation",
-    ],
+    title: "Industrial Control",
+    hoverLine: "VFD, PLC & servo drive thermal management",
+    image: "/images/applications/industrial-control.jpg",
+    photoLabel: "Industrial control & VFD modules",
   },
   {
-    icon: Building2,
-    title: "High-End Commercial Lighting",
-    subtitle: "Architectural & Safety",
-    color: "#A78BFA",
-    description:
-      "Architectural and commercial lighting demands both thermal performance and aesthetic precision. Our boards power landscape lighting, explosion-proof fixtures, and track lighting systems where compact design and efficient heat dissipation are equally critical. We support custom shapes and finishes for design-forward applications.",
-    features: [
-      "Architectural landscape lighting",
-      "Explosion-proof lighting modules",
-      "Track & spot lighting systems",
-      "Custom shapes & surface finishes",
-    ],
+    title: "Semiconductor Packaging",
+    hoverLine: "COB / CSP substrate & thermal interface",
+    image: "/images/applications/semiconductor-packaging.jpg",
+    photoLabel: "Semiconductor chip packaging substrate",
   },
 ];
 
@@ -74,66 +42,59 @@ const item = {
 
 export default function ApplicationsSection() {
   return (
-    <section id="applications" className="relative py-20 md:py-28 bg-navy-card/30">
+    <section id="applications" className="relative section-spacing bg-navy-card/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-16">
-          <div className="text-copper text-xs tracking-[0.2em] uppercase mb-3 font-medium">
-            Applications
-          </div>
-          <h2 className="font-['Syne'] text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-4">
+        <div className="mb-16 md:mb-24">
+          <div className="section-label">Industries</div>
+          <h2 className="font-['Inter'] text-3xl md:text-5xl lg:text-6xl font-bold text-text-primary">
             Industries We <span className="text-gradient-copper">Serve</span>
           </h2>
-          <p className="text-text-muted max-w-2xl text-sm md:text-base leading-relaxed">
-            Our MCPCBs power critical thermal management applications across four major industry verticals,
-            each with unique requirements that our product matrix addresses.
-          </p>
         </div>
 
-        {/* Application Cards */}
+        {/* Full-bleed image cards */}
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
         >
-          {APPLICATIONS.map((app) => (
+          {INDUSTRIES.map((app) => (
             <motion.div
               key={app.title}
               variants={item}
-              className="group bg-navy-card border border-border-dark rounded-xl p-6 md:p-8 hover:border-opacity-60 transition-all duration-300"
+              className="group relative h-64 md:h-80 rounded-xl cursor-pointer overflow-hidden bg-navy-light"
             >
-              <div className="flex items-start gap-4 mb-5">
-                <div
-                  className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0"
-                  style={{ backgroundColor: `${app.color}15` }}
-                >
-                  <app.icon size={24} style={{ color: app.color }} />
-                </div>
-                <div>
-                  <h3 className="font-['Syne'] text-lg font-bold text-text-primary">
-                    {app.title}
-                  </h3>
-                  <div className="text-xs tracking-wider uppercase mt-0.5" style={{ color: app.color }}>
-                    {app.subtitle}
-                  </div>
+              <Image
+                src={app.image}
+                alt={app.photoLabel}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const parent = target.parentElement;
+                  if (parent && !parent.querySelector('.fallback-icon')) {
+                    parent.innerHTML += `
+                      <div class="fallback-icon absolute inset-0 flex flex-col items-center justify-center gap-2">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:rgba(100,116,139,0.3)"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                        <span style="color:rgba(100,116,139,0.3);font-size:10px;letter-spacing:0.1em;text-transform:uppercase">${app.image.split('/').pop()}</span>
+                      </div>`;
+                  }
+                }}
+              />
+
+              {/* Industry name overlay */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-navy/80 via-navy/40 to-transparent z-10">
+                <h3 className="font-['Inter'] text-xl md:text-2xl font-bold text-white">
+                  {app.title}
+                </h3>
+                <div className="text-white/0 group-hover:text-white/70 text-xs mt-1 tracking-wider transition-all duration-300 max-h-0 group-hover:max-h-6 overflow-hidden">
+                  {app.hoverLine}
                 </div>
               </div>
-              <p className="text-text-muted text-sm leading-relaxed mb-5">
-                {app.description}
-              </p>
-              <ul className="space-y-2">
-                {app.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2 text-sm text-text-secondary">
-                    <div
-                      className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5"
-                      style={{ backgroundColor: app.color }}
-                    />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
             </motion.div>
           ))}
         </motion.div>

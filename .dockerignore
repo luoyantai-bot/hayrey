@@ -1,0 +1,17 @@
+node_modules
+.next
+.git
+.gitignore
+README.md
+Dockerfile
+.dockerignore
+dev.log
+*.log
+.env*.local
+prisma
+db
+mini-services
+upload
+download
+.zscripts
+agent-ctx

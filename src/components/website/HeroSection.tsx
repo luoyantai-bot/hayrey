@@ -1,91 +1,158 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Download, MessageSquare } from "lucide-react";
+import { ArrowDown, Download, MessageSquare, Play, Pause } from "lucide-react";
+import { useState, useRef } from "react";
 
 const STATS = [
   { value: "18+", label: "Product Types" },
   { value: "Direct", label: "Factory" },
-  { value: "5-7", label: "Days Sample" },
+  { value: "7 Days", label: "Sample Lead Time" },
   { value: "100%", label: "IPC Compliant" },
 ];
 
+const VIDEO_SRC = "/videos/company-reel.mp4";
+const VIDEO_POSTER = "/images/video-poster.jpg";
+
 export default function HeroSection() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const togglePlay = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) {
+      v.play();
+      setIsPlaying(true);
+    } else {
+      v.pause();
+      setIsPlaying(false);
+    }
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 grid-pattern opacity-40" />
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-copper/5 blur-[120px]" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-ice-blue/5 blur-[100px]" />
-      
-      {/* Copper circuit lines decoration */}
-      <svg className="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="30%" x2="100%" y2="30%" stroke="#B87333" strokeWidth="0.5" />
-        <line x1="0" y1="70%" x2="100%" y2="70%" stroke="#B87333" strokeWidth="0.5" />
-        <line x1="20%" y1="0" x2="20%" y2="100%" stroke="#B87333" strokeWidth="0.5" />
-        <line x1="80%" y1="0" x2="80%" y2="100%" stroke="#B87333" strokeWidth="0.5" />
-        <circle cx="20%" cy="30%" r="4" fill="#B87333" />
-        <circle cx="80%" cy="70%" r="4" fill="#B87333" />
-        <circle cx="20%" cy="70%" r="4" fill="#B87333" />
-        <circle cx="80%" cy="30%" r="4" fill="#B87333" />
-      </svg>
+      {/* Subtle grid pattern background */}
+      <div className="absolute inset-0 grid-pattern opacity-30" />
+      <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy to-navy-light" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
-        <div className="max-w-3xl">
-          {/* Tagline */}
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16">
+        {/* Split layout: Left text + Right video */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left: Copy */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-copper text-xs sm:text-sm tracking-[0.2em] uppercase mb-6 font-medium"
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
           >
-            Copper-Base MCPCB · Direct Factory · Dongguan, China
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-copper text-xs sm:text-sm tracking-[0.2em] uppercase mb-6 font-medium"
+            >
+              Semiconductor-Grade MCPCB Manufacturer
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="font-['Inter'] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary leading-[1.1] mb-8"
+            >
+              Where Heat Meets{" "}
+              <span className="text-gradient-copper">Precision.</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="text-text-muted text-sm md:text-base leading-relaxed max-w-lg mb-10"
+            >
+              Specializing in high-performance metal-core PCBs for demanding thermal applications — from automotive LED to power modules.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <button
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                className="bg-copper text-navy px-8 py-4 rounded-lg text-sm font-bold tracking-wider uppercase hover:bg-copper-light transition-all duration-200 copper-glow-hover flex items-center justify-center gap-2"
+              >
+                <Download size={16} />
+                Download Deck
+              </button>
+              <button
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                className="border border-copper text-copper px-8 py-4 rounded-lg text-sm font-bold tracking-wider uppercase hover:bg-copper/10 transition-all duration-200 flex items-center justify-center gap-2"
+              >
+                <MessageSquare size={16} />
+                Contact Engineer
+              </button>
+            </motion.div>
           </motion.div>
 
-          {/* Main headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-['Syne'] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary leading-[1.1] mb-6"
-          >
-            Where Heat Meets{" "}
-            <span className="text-gradient-copper">Precision.</span>
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-text-muted text-sm sm:text-base md:text-lg leading-relaxed max-w-xl mb-10"
-          >
-            Specialized metal-core PCB manufacturer for demanding thermal applications. 
-            Copper-base · Aluminum-base · Custom form factors. 
-            No middleman — you deal directly with the factory.
-          </motion.p>
-
-          {/* CTAs */}
+          {/* Right: 16:9 Video Player */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="relative"
           >
-            <button
-              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-              className="bg-copper text-navy px-8 py-4 rounded-lg text-sm font-bold tracking-wider uppercase hover:bg-copper-light transition-all duration-200 copper-glow-hover flex items-center justify-center gap-2"
+            <div
+              className="relative w-full rounded-xl overflow-hidden shadow-2xl shadow-black/40 border border-border-dark/50 group cursor-pointer"
+              style={{ aspectRatio: "16 / 9" }}
+              onClick={togglePlay}
             >
-              <Download size={16} />
-              Download Capability Deck
-            </button>
-            <button
-              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-              className="border border-copper text-copper px-8 py-4 rounded-lg text-sm font-bold tracking-wider uppercase hover:bg-copper/10 transition-all duration-200 flex items-center justify-center gap-2"
-            >
-              <MessageSquare size={16} />
-              Contact Engineer
-            </button>
+              {/* HTML5 Video */}
+              <video
+                ref={videoRef}
+                src={VIDEO_SRC}
+                poster={VIDEO_POSTER}
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className="absolute inset-0 w-full h-full object-cover"
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+              />
+
+              {/* Play/Pause overlay — visible when paused */}
+              {!isPlaying && (
+                <div className="absolute inset-0 bg-navy/50 flex flex-col items-center justify-center gap-3 transition-opacity duration-300">
+                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-copper/20 flex items-center justify-center group-hover:bg-copper/30 transition-all duration-300 group-hover:scale-110">
+                    <Play size={28} className="text-copper ml-1" />
+                  </div>
+                  <div className="text-text-dim text-xs tracking-wider uppercase text-center">
+                    3-min Corporate Reel
+                  </div>
+                </div>
+              )}
+
+              {/* Pause indicator — brief flash on pause */}
+              {isPlaying && (
+                <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-navy/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <Pause size={16} className="text-white" />
+                </div>
+              )}
+
+              {/* Decorative corner accents */}
+              <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-copper/40 rounded-tl-sm pointer-events-none" />
+              <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-copper/40 rounded-br-sm pointer-events-none" />
+            </div>
+
+            {/* Video caption */}
+            <div className="mt-3 text-center">
+              <span className="text-text-dim text-[10px] tracking-widest uppercase">
+                Watch Our Story
+              </span>
+            </div>
           </motion.div>
         </div>
 
@@ -93,8 +160,8 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16 md:mt-24 grid grid-cols-2 md:grid-cols-4 border-t border-border-dark pt-8"
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-20 md:mt-28 grid grid-cols-2 md:grid-cols-4 border-t border-border-dark pt-8"
         >
           {STATS.map((stat, i) => (
             <div
@@ -103,10 +170,10 @@ export default function HeroSection() {
                 i < STATS.length - 1 ? "md:border-r border-border-dark" : ""
               }`}
             >
-              <div className="text-2xl md:text-3xl font-bold text-copper font-['Syne']">
+              <div className="text-2xl md:text-4xl font-black text-copper font-['Inter'] tracking-tight">
                 {stat.value}
               </div>
-              <div className="text-text-dim text-xs tracking-wider uppercase mt-1">
+              <div className="text-text-dim text-[10px] tracking-wider uppercase mt-2">
                 {stat.label}
               </div>
             </div>

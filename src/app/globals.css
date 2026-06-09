@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -42,18 +42,29 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-navy: #050A14;
-  --color-navy-light: #0A1628;
-  --color-navy-card: #080D1A;
-  --color-navy-card-hover: #0F172A;
-  --color-border-dark: #1E293B;
-  --color-copper: #B87333;
-  --color-copper-light: #D4944A;
+  /* Deep semiconductor slate blue — main background */
+  --color-navy: #0F172A;
+  /* Slate-800 — lighter background areas */
+  --color-navy-light: #1E293B;
+  /* Card background — subtle lift from main bg */
+  --color-navy-card: #172033;
+  /* Card hover — slightly brighter */
+  --color-navy-card-hover: #1E293B;
+  /* Slate-700 — borders & dividers */
+  --color-border-dark: #334155;
+  /* Copper/brass metallic gold — primary accent (amber-600) */
+  --color-copper: #D97706;
+  /* Amber-500 — lighter accent */
+  --color-copper-light: #F59E0B;
   --color-ice-blue: #60A5FA;
+  /* Industrial white gray (slate-50) — primary text */
   --color-text-primary: #F8FAFC;
+  /* Slate-300 — secondary text */
   --color-text-secondary: #CBD5E1;
-  --color-text-muted: #64748B;
-  --color-text-dim: #475569;
+  /* Slate-400 — muted text */
+  --color-text-muted: #94A3B8;
+  /* Slate-500 — dim text */
+  --color-text-dim: #64748B;
   --color-green: #4ADE80;
   --color-amber: #F59E0B;
   --color-purple: #A78BFA;
@@ -63,37 +74,37 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #050A14;
+  --background: #0F172A;
   --foreground: #CBD5E1;
-  --card: #080D1A;
+  --card: #172033;
   --card-foreground: #CBD5E1;
-  --popover: #080D1A;
+  --popover: #172033;
   --popover-foreground: #CBD5E1;
-  --primary: #B87333;
-  --primary-foreground: #050A14;
-  --secondary: #0F172A;
+  --primary: #D97706;
+  --primary-foreground: #0F172A;
+  --secondary: #1E293B;
   --secondary-foreground: #CBD5E1;
-  --muted: #0F172A;
-  --muted-foreground: #64748B;
+  --muted: #1E293B;
+  --muted-foreground: #94A3B8;
   --accent: #60A5FA;
-  --accent-foreground: #050A14;
+  --accent-foreground: #0F172A;
   --destructive: #EF4444;
-  --border: #1E293B;
-  --input: #1E293B;
-  --ring: #B87333;
-  --chart-1: #B87333;
+  --border: #334155;
+  --input: #334155;
+  --ring: #D97706;
+  --chart-1: #D97706;
   --chart-2: #60A5FA;
   --chart-3: #4ADE80;
   --chart-4: #A78BFA;
   --chart-5: #F59E0B;
-  --sidebar: #080D1A;
+  --sidebar: #172033;
   --sidebar-foreground: #CBD5E1;
-  --sidebar-primary: #B87333;
-  --sidebar-primary-foreground: #050A14;
-  --sidebar-accent: #0F172A;
+  --sidebar-primary: #D97706;
+  --sidebar-primary-foreground: #0F172A;
+  --sidebar-accent: #1E293B;
   --sidebar-accent-foreground: #CBD5E1;
-  --sidebar-border: #1E293B;
-  --sidebar-ring: #B87333;
+  --sidebar-border: #334155;
+  --sidebar-ring: #D97706;
 }
 
 @layer base {
@@ -102,10 +113,10 @@
   }
   body {
     @apply bg-navy text-foreground;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 }
 
@@ -114,14 +125,14 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #050A14;
+  background: #0F172A;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
+  background: #334155;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #475569;
 }
 
 /* Smooth scrolling */
@@ -129,26 +140,26 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Copper glow effect */
+/* Amber glow effect */
 .copper-glow {
-  box-shadow: 0 0 20px rgba(184, 115, 51, 0.15);
+  box-shadow: 0 0 20px rgba(217, 119, 6, 0.15);
 }
 
 .copper-glow-hover:hover {
-  box-shadow: 0 0 30px rgba(184, 115, 51, 0.25);
+  box-shadow: 0 0 30px rgba(217, 119, 6, 0.25);
 }
 
 /* Grid pattern background */
 .grid-pattern {
   background-image: 
-    linear-gradient(rgba(30, 41, 59, 0.3) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(30, 41, 59, 0.3) 1px, transparent 1px);
+    linear-gradient(rgba(51, 65, 85, 0.3) 1px, transparent 1px),
+    linear-gradient(90px, rgba(51, 65, 85, 0.3) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
-/* Gradient text */
+/* Gradient text — amber metallic */
 .text-gradient-copper {
-  background: linear-gradient(135deg, #B87333, #D4944A);
+  background: linear-gradient(135deg, #D97706, #F59E0B);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -164,7 +175,7 @@ html {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, #B87333, transparent, #60A5FA);
+  background: linear-gradient(135deg, #D97706, transparent, #60A5FA);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   -webkit-mask-composite: xor;
@@ -173,7 +184,7 @@ html {
 
 /* Section divider */
 .section-divider {
-  border-top: 1px solid #1E293B;
+  border-top: 1px solid #334155;
 }
 
 /* Hover card effect */
@@ -181,6 +192,31 @@ html {
   transition: all 0.3s ease;
 }
 .hover-card:hover {
-  border-color: rgba(184, 115, 51, 0.3);
-  box-shadow: 0 0 30px rgba(184, 115, 51, 0.08);
+  border-color: rgba(217, 119, 6, 0.3);
+  box-shadow: 0 0 30px rgba(217, 119, 6, 0.08);
+}
+
+/* Section spacing — 40% increased whitespace */
+.section-spacing {
+  @apply py-28 md:py-40;
+}
+
+/* Media placeholder block — solid #1E293B */
+.media-placeholder {
+  @apply bg-[#1E293B] rounded-lg overflow-hidden flex flex-col items-center justify-center gap-2 relative;
+}
+
+/* Video placeholder block */
+.video-placeholder {
+  @apply bg-[#1E293B] rounded-lg overflow-hidden flex flex-col items-center justify-center gap-2 relative;
+}
+
+/* Big number style — NVIDIA/Samsung inspired */
+.big-number {
+  @apply text-5xl md:text-7xl font-black font-['Inter'] tracking-tight;
+}
+
+/* Minimal section heading */
+.section-label {
+  @apply text-copper text-xs tracking-[0.2em] uppercase mb-3 font-medium;
 }
