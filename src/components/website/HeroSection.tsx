@@ -11,7 +11,7 @@ const STATS = [
   { value: "100%", label: "IPC Compliant" },
 ];
 
-const VIDEO_SRC = "/videos/company-reel.mp4";
+const VIDEO_SRC = "https://pub-162cd5f973914fdc88457a3ff54fbb92.r2.dev/hayrey/company-reel.mp4";
 const VIDEO_POSTER = "/images/video-poster.jpg";
 
 export default function HeroSection() {
