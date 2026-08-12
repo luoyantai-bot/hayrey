@@ -14,7 +14,7 @@ const FOOTER_LINKS = {
     "Commercial Lighting",
     "Automotive Electronics",
     "Industrial Control",
-    "Semiconductor Packaging",
+    "Power Supply",
   ],
   Company: [
     "About Hayrey",
@@ -98,7 +98,7 @@ export default function Footer() {
                           "Commercial Lighting": "applications",
                           "Automotive Electronics": "applications",
                           "Industrial Control": "applications",
-                          "Semiconductor Packaging": "applications",
+                          "Power Supply": "applications",
                           "About Hayrey": "about",
                           Manufacturing: "manufacturing",
                           Certifications: "certifications",

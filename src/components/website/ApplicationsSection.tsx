@@ -23,10 +23,10 @@ const INDUSTRIES = [
     photoLabel: "Industrial control & VFD modules",
   },
   {
-    title: "Semiconductor Packaging",
-    hoverLine: "COB / CSP substrate & thermal interface",
-    image: "/images/applications/semiconductor-packaging.jpg",
-    photoLabel: "Semiconductor chip packaging substrate",
+    title: "Power Supply",
+    hoverLine: "SMPS, UPS & converter MCPCB for high-reliability power systems",
+    image: "/images/applications/power-supply.jpg",
+    photoLabel: "Power supply MCPCB for SMPS and UPS systems",
   },
 ];
 
