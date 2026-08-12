@@ -114,7 +114,6 @@ export default function HeroSection() {
                 ref={videoRef}
                 src={VIDEO_SRC}
                 poster={VIDEO_POSTER}
-                muted
                 loop
                 playsInline
                 preload="metadata"
