@@ -48,7 +48,9 @@ export default function AboutSection() {
           <div className="flex flex-col justify-center">
             <div className="space-y-4 text-text-secondary text-sm md:text-base leading-relaxed mb-10">
               <p>
-                Dongguan Hayrey Integrated Technology is a manufacturer specializing exclusively in metal-core printed circuit boards (MCPCBs), purpose-built for thermal management applications.
+                Dongguan Hayrey Integrated Technology is a manufacturer specializing exclusively in metal-core printed circuit boards (MCPCBs), purpose-built for thermal management applications, and has merged with{" "}
+                <span className="text-copper font-medium">Multech</span> to
+                accelerate its development.
               </p>
               <p>
                 Our product range spans aluminum-base, copper-base, and specialized thermal structures — one supplier for your entire MCPCB need.

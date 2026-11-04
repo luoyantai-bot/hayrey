@@ -51,11 +51,16 @@ export default function Footer() {
                 alt="Hayrey Logo"
                 className="w-8 h-8 rounded-md object-cover"
               />
-              <div className="flex items-baseline gap-1">
-                <span className="text-copper font-bold text-lg tracking-wider font-['Inter']">
-                  HAYREY
+              <div className="flex flex-col">
+                <div className="flex items-baseline gap-1">
+                  <span className="text-copper font-bold text-lg tracking-wider font-['Inter']">
+                    HAYREY
+                  </span>
+                  <span className="text-text-dim text-xs tracking-widest">INTEGRATED</span>
+                </div>
+                <span className="text-text-muted text-[10px] tracking-[0.22em] uppercase mt-1">
+                  A Multech Company
                 </span>
-                <span className="text-text-dim text-xs tracking-widest">INTEGRATED</span>
               </div>
             </div>
             <p className="text-text-muted text-xs leading-relaxed mb-6 max-w-xs">

@@ -72,12 +72,17 @@ export default function Navbar() {
               alt="Hayrey Integrated Technology Logo"
               className="w-8 h-8 md:w-10 md:h-10 rounded-md object-cover"
             />
-            <div className="flex items-baseline gap-1">
-              <span className="text-copper font-bold text-lg tracking-wider font-['Inter']">
-                HAYREY
-              </span>
-              <span className="text-text-dim text-xs tracking-widest hidden sm:inline">
-                INTEGRATED
+            <div className="flex flex-col">
+              <div className="flex items-baseline gap-1">
+                <span className="text-copper font-bold text-lg tracking-wider font-['Inter']">
+                  HAYREY
+                </span>
+                <span className="text-text-dim text-xs tracking-widest hidden sm:inline">
+                  INTEGRATED
+                </span>
+              </div>
+              <span className="text-text-muted text-[9px] sm:text-[10px] tracking-[0.22em] uppercase mt-1">
+                A Multech Company
               </span>
             </div>
           </button>
